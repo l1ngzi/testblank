@@ -43,7 +43,7 @@ def haversine_distance(latitude_1: float, longitude_1: float, latitude_2: float,
     d_lat = lat1 - lat2
 
     a = mod_math.pow(mod_math.sin(d_lat/2),2) + \
-        mod_math.pow(mod_math.sin(d_lon),2) * mod_math.cos(lat1) * mod_math.cos(lat1)
+        mod_math.pow(mod_math.sin(d_lon/2),2) * mod_math.cos(lat1) * mod_math.cos(lat2)
     c = 2 * mod_math.asin(mod_math.sqrt(a))
     d = EARTH_RADIUS * c
 
