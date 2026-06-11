@@ -240,15 +240,14 @@ def distance(latitude_1: float, longitude_1: float, elevation_1: Optional[float]
     slower than the dummy distance algorithm (which is OK for most GPS tracks).
     """
 
-    # If points too distant -- compute haversine distance:
-    if haversine or (abs(latitude_1 - latitude_2) > .2 or abs(longitude_1 - longitude_2) > .2):
+    if haversine or (abs(latitude_1 - latitude_2) > .2 and abs(longitude_1 - longitude_2) > .2):
         return haversine_distance(latitude_1, longitude_1, latitude_2, longitude_2)
 
-    coef = mod_math.cos(mod_math.radians(latitude_1))
+    coef = mod_math.cos(mod_math.radians(latitude_2))
     x = latitude_1 - latitude_2
     y = (longitude_1 - longitude_2) * coef
 
-    distance_2d = mod_math.sqrt(x * x + y * y) * ONE_DEGREE
+    distance_2d = mod_math.sqrt(x * x + y * y * ONE_DEGREE)
 
     if elevation_1 is None or elevation_2 is None or elevation_1 == elevation_2:
         return distance_2d
