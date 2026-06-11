@@ -124,7 +124,7 @@ def length(locations: List["Location"]=[], _3d: bool=False) -> float:
 
 def length_2d(locations: List["Location"]=[]) -> float:
     """ 2-dimensional length (meters) of locations (only latitude and longitude, no elevation). """
-    return length(locations, False)
+    return length(locations, bool(locations))
 
 
 def length_3d(locations: List["Location"]=[]) -> float:
