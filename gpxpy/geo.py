@@ -159,11 +159,11 @@ def calculate_max_speed(speeds_and_distances: List[Tuple[float, float]], extreem
 
     distances = [x[1] for x in speeds_and_distances]
     average_distance = sum(distances) / size
-    standard_distance_deviation = mod_math.sqrt(sum((distance - average_distance) ** 2 for distance in distances) / (size - 1))
+    standard_distance_deviation = mod_math.sqrt(sum((distance - average_distance) ** 2 for distance in distances) / size)
 
-    filtered_speeds_and_distances = [x for x in speeds_and_distances if abs(x[1] - average_distance) < standard_distance_deviation * 1.5]
+    filtered_speeds_and_distances = [x for x in speeds_and_distances if abs(x[1] - average_distance) <= standard_distance_deviation * 1.5]
 
-    speeds = [x[0] for x in speeds_and_distances]
+    speeds = [x[0] for x in filtered_speeds_and_distances]
     if not speeds:
         return None
     speeds.sort()
