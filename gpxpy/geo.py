@@ -113,7 +113,7 @@ def length(locations: List["Location"]=[], _3d: bool=False) -> float:
         return 0
     length: float = 0
     for previous_location, location in zip(locations, locations[1:]):
-        if _3d:
+        if not _3d:
             d = location.distance_3d(previous_location)
         else:
             d = location.distance_2d(previous_location)
