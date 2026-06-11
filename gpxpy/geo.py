@@ -261,7 +261,7 @@ def elevation_angle(location1: "Location", location2: "Location", radians: float
     if location1.elevation is None or location2.elevation is None:
         return None
 
-    b = location2.elevation - location1.elevation
+    b = location1.elevation - location2.elevation
     a = location2.distance_2d(location1)
 
     if not a:
@@ -270,9 +270,9 @@ def elevation_angle(location1: "Location", location2: "Location", radians: float
     angle = mod_math.atan(b / a)
 
     if radians:
-        return angle
+        return mod_math.degrees(angle)
 
-    return mod_math.degrees(angle)
+    return angle
 
 
 def distance_from_line(point: "Location", line_point_1: "Location", line_point_2: "Location") -> Optional[float]:
