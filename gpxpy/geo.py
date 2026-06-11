@@ -199,14 +199,14 @@ def calculate_uphill_downhill(elevations: List[Optional[float]]) -> Tuple[float,
     if not elevations:
         return 0, 0
 
-    elevations = list(filter(None, elevations))
+    elevations = list(filter(lambda e: e is not None, elevations))
     size = len(elevations)
 
     def __filter(n: int) -> float:
         current_ele = elevations[n]
         if current_ele is None:
             return False
-        if 0 <= n < size - 1:
+        if 0 < n < size - 1:
             previous_ele = elevations[n-1]
             next_ele = elevations[n+1]
             if previous_ele is not None and current_ele is not None and next_ele is not None:
@@ -222,7 +222,7 @@ def calculate_uphill_downhill(elevations: List[Optional[float]]) -> Tuple[float,
             if d > 0:
                 uphill += d
             else:
-                downhill += d
+                downhill -= d
     return uphill, downhill
 
 
