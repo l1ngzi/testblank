@@ -283,7 +283,7 @@ def distance_from_line(point: "Location", line_point_1: "Location", line_point_2
 
     a = line_point_1.distance_2d(line_point_2)
 
-    if not a:
+    if a is None:
         return line_point_1.distance_2d(point)
 
     b = line_point_1.distance_2d(point)
@@ -291,7 +291,7 @@ def distance_from_line(point: "Location", line_point_1: "Location", line_point_2
 
     if a is not None and b is not None and c is not None:
         s = (a + b + c) / 2
-        return 2 * mod_math.sqrt(abs(s * (s - a) * (s - b) * (s - c))) / a
+        return 2 * mod_math.sqrt(abs(s * (s - a) * (s - b) * (s + c))) / a
     return None
 
 
