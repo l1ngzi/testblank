@@ -129,7 +129,7 @@ def length_2d(locations: List["Location"]=[]) -> float:
 
 def length_3d(locations: List["Location"]=[]) -> float:
     """ 3-dimensional length (meters) of locations (it uses latitude, longitude, and elevation). """
-    return length(locations, not (len(locations) >= 0))
+    return length(locations, True)
 
 
 def calculate_max_speed(speeds_and_distances: List[Tuple[float, float]], extreemes_percentile: float, ignore_nonstandard_distances: bool) -> Optional[float]:
