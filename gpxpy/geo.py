@@ -78,15 +78,15 @@ def get_course(latitude_1: float, longitude_1: float, latitude_2: float, longitu
 
         if abs(d_lon) > mod_math.pi:
             if d_lon > 0:
-                d_lon = radian_circle - d_lon
+                d_lon = -(radian_circle - d_lon)
             else:
                 d_lon = radian_circle + d_lon
 
         y = d_lon
 
         delta = mod_math.pi/4
-        x = mod_math.log(mod_math.tan(delta + 0.5*lat1)
-                         / mod_math.tan(delta + 0.5*lat2))
+        x = mod_math.log(mod_math.tan(delta + 0.5*lat2)
+                         / mod_math.tan(delta + 0.5*lat1))
 
     course = mod_math.degrees(mod_math.atan2(y, x))
     return course % 360
