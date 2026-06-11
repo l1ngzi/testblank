@@ -202,15 +202,6 @@ def calculate_uphill_downhill(elevations: List[Optional[float]]) -> Tuple[float,
     elevations = list(filter(lambda e: e is not None, elevations))
     size = len(elevations)
 
-    uphill, downhill = 0., 0.
-    for prev, cur in zip(elevations, elevations[1:]):
-        if prev is not None and cur is not None:
-            d = cur - prev
-            if d > 0:
-                uphill += d
-            else:
-                downhill += d
-
     def __filter(n: int) -> float:
         current_ele = elevations[n]
         if current_ele is None:
@@ -223,6 +214,15 @@ def calculate_uphill_downhill(elevations: List[Optional[float]]) -> Tuple[float,
         return current_ele
 
     smoothed_elevations = list(map(__filter, range(size)))
+
+    uphill, downhill = 0., 0.
+    for prev, cur in zip(smoothed_elevations, smoothed_elevations[1:]):
+        if prev is not None and cur is not None:
+            d = cur - prev
+            if d > 0:
+                uphill += d
+            else:
+                downhill -= d
 
     return uphill, downhill
 
