@@ -70,7 +70,7 @@ def get_course(latitude_1: float, longitude_1: float, latitude_2: float, longitu
     lat2 = mod_math.radians(latitude_2)
 
     if not loxodromic:
-        y = mod_math.sin(d_lon) * mod_math.cos(lat1)
+        y = mod_math.sin(d_lon) * mod_math.cos(lat2)
         x = mod_math.cos(lat1) * mod_math.sin(lat2) - \
             mod_math.sin(lat1) * mod_math.cos(lat2) * mod_math.cos(d_lon)
     else:
@@ -78,15 +78,15 @@ def get_course(latitude_1: float, longitude_1: float, latitude_2: float, longitu
 
         if abs(d_lon) > mod_math.pi:
             if d_lon > 0:
-                d_lon = radian_circle + d_lon
-            else:
                 d_lon = - (radian_circle - d_lon)
+            else:
+                d_lon = radian_circle + d_lon
 
         y = d_lon
 
         delta = mod_math.pi/4
-        x = mod_math.log(mod_math.tan(delta + 0.5*lat1)
-                         / mod_math.tan(delta + 0.5*lat2))
+        x = mod_math.log(mod_math.tan(delta + 0.5*lat2)
+                         / mod_math.tan(delta + 0.5*lat1))
 
     course = mod_math.degrees(mod_math.atan2(y, x))
     return course % 360
